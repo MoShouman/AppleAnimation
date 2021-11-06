@@ -2,11 +2,13 @@ const html = document.documentElement;
 const canvas = document.getElementById("hero-lightpass");
 const context = canvas.getContext("2d");
 
+//the number of images (frames) and the URL which we could get each frame dynamically
 const frameCount = 148;
 const currentFrame = index => (
   `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index.toString().padStart(4, '0')}.jpg`
 )
 
+//load imgs and cache them
 const preloadImages = () => {
   for (let i = 1; i < frameCount; i++) {
     const img = new Image();
@@ -14,6 +16,7 @@ const preloadImages = () => {
   }
 };
 
+//setup images
 const img = new Image()
 img.src = currentFrame(1);
 canvas.width=1158;
@@ -27,6 +30,7 @@ const updateImage = index => {
   context.drawImage(img, 0, 0);
 }
 
+//handle scroll
 window.addEventListener('scroll', () => {  
   const scrollTop = html.scrollTop;
   const maxScrollTop = html.scrollHeight - window.innerHeight;
